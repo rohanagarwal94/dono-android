@@ -4,15 +4,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_labels"
-            android:icon="@drawable/ic_local_offer_white_24dp"
+            android:icon="@drawable/tag"
             android:title="Labels" />
         <item
             android:id="@+id/nav_add_label"
-            android:icon="@drawable/ic_add_white_48dp"
+            android:icon="@drawable/plus"
             android:title="Add Label" />
         <item
             android:id="@+id/nav_key"
-            android:icon="@drawable/ic_vpn_key_white_24dp"
+            android:icon="@drawable/key"
             android:title="Key" />
     </group>
 
