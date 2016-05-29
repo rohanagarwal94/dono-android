@@ -112,7 +112,10 @@ public class MainActivity extends AppCompatActivity
             this.addLabelLayout();
         } else if (id == R.id.nav_key) {
             this.keyLayout();
+        } else if (id == R.id.nav_settings) {
+            this.settingsLayout();
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -204,6 +207,7 @@ public class MainActivity extends AppCompatActivity
         this.showKeyFragment();
     }
 
+
     private void showKeyFragment() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -213,6 +217,23 @@ public class MainActivity extends AppCompatActivity
 
         fragmentTransaction.commit();
     }
+
+    private void settingsLayout() {
+        this.setToolbarTitle("Settings");
+
+        this.showsettingsFragment();
+    }
+
+    private void showsettingsFragment() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        SettingsFragment settingsFragment = new SettingsFragment();
+        fragmentTransaction.replace(R.id.mainFragment, settingsFragment);
+
+        fragmentTransaction.commit();
+    }
+
 
     @Override
     public void onStart() {
