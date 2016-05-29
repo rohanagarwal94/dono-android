@@ -1,0 +1,25 @@
+language: android
+jdk: oraclejdk7
+sudo: false
+
+env:
+  global:
+    - GRADLE_OPTS="-XX:MaxPermSize=4g -Xmx4g"
+    - ANDROID_SDKS=android-23
+    - ANDROID_TARGET=android-23
+
+android:
+  components:
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - extra-android-support
+    - platform-tools
+    - tools
+    - build-tools-23.0.2
+    - android-23
+
+script:
+  - ./gradlew build
+
+notifications:
+  email: false

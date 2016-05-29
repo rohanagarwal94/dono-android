@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_labels"
+            android:icon="@drawable/ic_local_offer_white_24dp"
+            android:title="Labels" />
+        <item
+            android:id="@+id/nav_add_label"
+            android:icon="@drawable/ic_add_white_48dp"
+            android:title="Add Label" />
+        <item
+            android:id="@+id/nav_key"
+            android:icon="@drawable/ic_vpn_key_white_24dp"
+            android:title="Key" />
+    </group>
+
+</menu>
