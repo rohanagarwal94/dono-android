@@ -3,4 +3,6 @@
 ## OSS used
 
 - [AndroidSwipeLayout](https://github.com/daimajia/AndroidSwipeLayout)
+- [Material Design Icons](https://github.com/Templarian/MaterialDesign)
+- [Material Palette](https://www.materialpalette.com/)
 - [SuperToasts](https://github.com/JohnPersano/Supertoasts)
