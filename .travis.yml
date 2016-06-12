@@ -22,4 +22,4 @@ script:
   - ./gradlew build
 
 notifications:
-  email: false
+    on_failure: always
