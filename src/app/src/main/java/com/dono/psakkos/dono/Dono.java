@@ -34,29 +34,30 @@ public class Dono
 
     public static final int MIN_KEY_LENGTH = 17;
 
-    private static BigInteger[] rs = {
-            new BigInteger("56641855831775999999999999999"),
-            new BigInteger("2178532916606769230769230768"),
-            new BigInteger("83789727561798816568047336"),
-            new BigInteger("3222681829299954483386435"),
-            new BigInteger("123949301126921326284092"),
-            new BigInteger("4767280812573897164771"),
-            new BigInteger("183356954329765275567"),
-            new BigInteger("7052190551144818290"),
-            new BigInteger("271238098120954548"),
-            new BigInteger("10432234543113635"),
-            new BigInteger("401239790119754"),
-            new BigInteger("15432299619989"),
-            new BigInteger("593549985383"),
-            new BigInteger("22828845590"),
-            new BigInteger("878032521"),
-            new BigInteger("33770480"),
-            new BigInteger("1298863"),
-            new BigInteger("49955"),
-            new BigInteger("1920"),
-            new BigInteger("72"),
-            new BigInteger("1"),
-    };
+    private static BigInteger[] rs =
+            {
+                new BigInteger("56641855831775999999999999999"),
+                new BigInteger("2178532916606769230769230768"),
+                new BigInteger("83789727561798816568047336"),
+                new BigInteger("3222681829299954483386435"),
+                new BigInteger("123949301126921326284092"),
+                new BigInteger("4767280812573897164771"),
+                new BigInteger("183356954329765275567"),
+                new BigInteger("7052190551144818290"),
+                new BigInteger("271238098120954548"),
+                new BigInteger("10432234543113635"),
+                new BigInteger("401239790119754"),
+                new BigInteger("15432299619989"),
+                new BigInteger("593549985383"),
+                new BigInteger("22828845590"),
+                new BigInteger("878032521"),
+                new BigInteger("33770480"),
+                new BigInteger("1298863"),
+                new BigInteger("49955"),
+                new BigInteger("1920"),
+                new BigInteger("72"),
+                new BigInteger("1"),
+            };
 
     public String computePassword(String k, String l)
     {
@@ -107,6 +108,7 @@ public class Dono
         try
         {
             byte[] dk = null;
+
             PKCS5S2ParametersGenerator gen = new PKCS5S2ParametersGenerator(new SHA256Digest());
             gen.init(pass.getBytes(), salt.getBytes(), c);
             dk = ((KeyParameter) gen.generateDerivedParameters(dkLen * 8)).getKey();
@@ -125,13 +127,14 @@ public class Dono
     {
         try
         {
-            MessageDigest h = MessageDigest.getInstance("SHA-256");
-            h.reset();
+            MessageDigest hash = MessageDigest.getInstance("SHA-256");
+            hash.update(data.getBytes());
 
-            return bin2hex(h.digest((data).getBytes()));
+            return bin2hex(hash.digest());
         }
         catch(Exception e)
         {
+            e.printStackTrace();
         }
 
         return null;
@@ -139,6 +142,6 @@ public class Dono
 
     private String bin2hex(byte[] data)
     {
-        return String.format("%0" + (data.length*2) + "X", new BigInteger(1, data)).toLowerCase();
+        return String.format("%0" + (data.length * 2) + "X", new BigInteger(1, data)).toLowerCase();
     }
 }
