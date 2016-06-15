@@ -28,11 +28,11 @@ public class Dono
     private static final String MAGIC_SALT =
             "4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b";
 
-    public static final int MIN_KEY_LENGTH = 17;
-
     private static char MAGIC_SYMBOL= '!';
 
     private static char MAGIC_CAPITAL= 'A';
+
+    public static final int MIN_KEY_LENGTH = 17;
 
     private static BigInteger[] rs = {
             new BigInteger("56641855831775999999999999999"),
