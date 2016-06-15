@@ -16,73 +16,112 @@
 
 package com.dono.psakkos.dono;
 
+import org.spongycastle.crypto.digests.SHA256Digest;
+import org.spongycastle.crypto.generators.PKCS5S2ParametersGenerator;
+import org.spongycastle.crypto.params.KeyParameter;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
 public class Dono
 {
+    private static final String MAGIC_SALT =
+            "4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b";
+
     public static final int MIN_KEY_LENGTH = 17;
 
+    private static char MAGIC_SYMBOL= '!';
+
+    private static char MAGIC_CAPITAL= 'A';
+
     private static BigInteger[] rs = {
-            new BigInteger("21688899074207999999999999999"),
-            new BigInteger("834188425931076923076923075"),
-            new BigInteger("32084170228118343195266271"),
-            new BigInteger("1234006547235320892125624"),
-            new BigInteger("47461790278281572774061"),
-            new BigInteger("1825453472241598952847"),
-            new BigInteger("70209748932369190493"),
-            new BigInteger("2700374958937276556"),
-            new BigInteger("103860575343741405"),
-            new BigInteger("3994637513220822"),
-            new BigInteger("153639904354646"),
-            new BigInteger("5909227090562"),
-            new BigInteger("227277965020"),
-            new BigInteger("8741460192"),
-            new BigInteger("336210006"),
-            new BigInteger("12931153"),
-            new BigInteger("497351"),
-            new BigInteger("19127"),
-            new BigInteger("734"),
-            new BigInteger("27"),
-            new BigInteger("0"),
+            new BigInteger("56641855831775999999999999999"),
+            new BigInteger("2178532916606769230769230768"),
+            new BigInteger("83789727561798816568047336"),
+            new BigInteger("3222681829299954483386435"),
+            new BigInteger("123949301126921326284092"),
+            new BigInteger("4767280812573897164771"),
+            new BigInteger("183356954329765275567"),
+            new BigInteger("7052190551144818290"),
+            new BigInteger("271238098120954548"),
+            new BigInteger("10432234543113635"),
+            new BigInteger("401239790119754"),
+            new BigInteger("15432299619989"),
+            new BigInteger("593549985383"),
+            new BigInteger("22828845590"),
+            new BigInteger("878032521"),
+            new BigInteger("33770480"),
+            new BigInteger("1298863"),
+            new BigInteger("49955"),
+            new BigInteger("1920"),
+            new BigInteger("72"),
+            new BigInteger("1"),
     };
 
-    private static String EVALUATOR_CHEAT= "!A";
-
-    public static String computePassword(String k, String st)
+    public String computePassword(String k, String l)
     {
-        st = st.toLowerCase().trim();
-
-        String s = "4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b";
-        s = SHA_256(k + st + s);
-        String d = SHA_256(k + st + s);
-
-        BigInteger rs = decideRounds(k);
-
-        for (BigInteger i = BigInteger.ZERO; i.compareTo(rs) < 0; i.add(BigInteger.ONE))
+        if (k.length() < Dono.MIN_KEY_LENGTH)
         {
-            s = SHA_256(d + s);
-            d = SHA_256(d + s);
+            return ""; // TODO: fix me
         }
 
-        d = d + Dono.EVALUATOR_CHEAT;
+        l = l.toLowerCase().trim();
+
+        int c = this.getIterations(k);
+
+        String d = this.derivePassword(k, l, c, 32);
+
+        char[] tmp = d.toCharArray();
+
+        tmp[tmp.length - 2] = Dono.MAGIC_SYMBOL;
+        tmp[tmp.length - 1] = Dono.MAGIC_CAPITAL;
+
+        return new String(tmp);
+    }
+
+    private int getIterations(String k)
+    {
+        if (k.length() >= rs.length)
+        {
+            return rs[rs.length - 1].intValue();
+        }
+        else
+        {
+            return rs[k.length()].intValue();
+        }
+    }
+
+    public String derivePassword(String k, String l, int c, int dkLen)
+    {
+        String s = this.SHA256(k + l + this.MAGIC_SALT);
+
+        String d = this.PBKDF2(k, s, c, dkLen);
 
         return d;
     }
 
-    private static BigInteger decideRounds(String k)
+    private String PBKDF2(String pass, String salt, int c, int dkLen)
     {
-        if (k.length() >= rs.length)
+        String d = null;
+
+        try
         {
-            return rs[rs.length - 1];
+            byte[] dk = null;
+            PKCS5S2ParametersGenerator gen = new PKCS5S2ParametersGenerator(new SHA256Digest());
+            gen.init(pass.getBytes(), salt.getBytes(), c);
+            dk = ((KeyParameter) gen.generateDerivedParameters(dkLen * 8)).getKey();
+
+            d = this.bin2hex(dk);
         }
-        else
+        catch (Exception e)
         {
-            return rs[k.length()];
+            e.printStackTrace();
         }
+
+        return d;
     }
 
-    private static String SHA_256(String data)
+    private String SHA256(String data)
     {
         try
         {
@@ -98,7 +137,7 @@ public class Dono
         return null;
     }
 
-    private static String bin2hex(byte[] data)
+    private String bin2hex(byte[] data)
     {
         return String.format("%0" + (data.length*2) + "X", new BigInteger(1, data)).toLowerCase();
     }

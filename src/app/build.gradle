@@ -38,4 +38,6 @@ dependencies {
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'
 
     compile 'com.github.johnpersano:supertoasts:1.3.4@aar'
+
+    compile 'com.madgag.spongycastle:prov:1.54.0.0'
 }
