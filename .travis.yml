@@ -20,7 +20,7 @@ android:
 
 script:
   - cd src
-  - ./gradlew connectedCheck
+  - ./gradlew test
 
 notifications:
     on_failure: always
