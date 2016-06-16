@@ -19,7 +19,8 @@ android:
     - android-23
 
 script:
-  - ./src/gradlew connectedCheck
+  - cd src
+  - ./gradlew connectedCheck
 
 notifications:
     on_failure: always
