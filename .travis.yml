@@ -19,7 +19,7 @@ android:
     - android-23
 
 script:
-  - ./gradlew build
+  - ./src/gradlew build
 
 notifications:
     on_failure: always
