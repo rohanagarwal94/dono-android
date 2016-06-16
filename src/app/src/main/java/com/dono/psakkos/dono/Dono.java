@@ -25,43 +25,55 @@ import java.security.MessageDigest;
 
 public class Dono
 {
-    private static final String MAGIC_SALT =
-            "4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b";
-
-    private static char MAGIC_SYMBOL= '!';
-
-    private static char MAGIC_CAPITAL= 'A';
-
     public static final int MIN_KEY_LENGTH = 17;
 
-    private static BigInteger[] rs =
+    public static final int MAX_DK_LEN = 32;
+
+    private static BigInteger[] Iterations =
             {
-                new BigInteger("56641855831775999999999999999"),
-                new BigInteger("2178532916606769230769230768"),
-                new BigInteger("83789727561798816568047336"),
-                new BigInteger("3222681829299954483386435"),
-                new BigInteger("123949301126921326284092"),
-                new BigInteger("4767280812573897164771"),
-                new BigInteger("183356954329765275567"),
-                new BigInteger("7052190551144818290"),
-                new BigInteger("271238098120954548"),
-                new BigInteger("10432234543113635"),
-                new BigInteger("401239790119754"),
-                new BigInteger("15432299619989"),
-                new BigInteger("593549985383"),
-                new BigInteger("22828845590"),
-                new BigInteger("878032521"),
-                new BigInteger("33770480"),
-                new BigInteger("1298863"),
-                new BigInteger("49955"),
-                new BigInteger("1920"),
-                new BigInteger("72"),
-                new BigInteger("1"),
+                    new BigInteger("56641855831775999999999999999"),
+                    new BigInteger("2178532916606769230769230768"),
+                    new BigInteger("83789727561798816568047336"),
+                    new BigInteger("3222681829299954483386435"),
+                    new BigInteger("123949301126921326284092"),
+                    new BigInteger("4767280812573897164771"),
+                    new BigInteger("183356954329765275567"),
+                    new BigInteger("7052190551144818290"),
+                    new BigInteger("271238098120954548"),
+                    new BigInteger("10432234543113635"),
+                    new BigInteger("401239790119754"),
+                    new BigInteger("15432299619989"),
+                    new BigInteger("593549985383"),
+                    new BigInteger("22828845590"),
+                    new BigInteger("878032521"),
+                    new BigInteger("33770480"),
+                    new BigInteger("1298863"),
+                    new BigInteger("49955"),
+                    new BigInteger("1920"),
+                    new BigInteger("72"),
+                    new BigInteger("1"),
             };
+
+    private static final String MagicSalt =
+            "4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b";
+
+    private static char MagicSymbol = '!';
+
+    private static char MagicCapital = 'A';
 
     public String computePassword(String k, String l)
     {
+        return this.computePassword(k, l, 32, false, false);
+    }
+
+    private String computePassword(String k, String l, int dkLen, boolean addFixedSymbol, boolean addFixedCapital)
+    {
         if (k.length() < Dono.MIN_KEY_LENGTH)
+        {
+            return ""; // TODO: fix me
+        }
+
+        if (dkLen > Dono.MAX_DK_LEN)
         {
             return ""; // TODO: fix me
         }
@@ -70,33 +82,52 @@ public class Dono
 
         int c = this.getIterations(k);
 
-        String d = this.derivePassword(k, l, c, 32);
+        String d = this.derivePassword(k, l, c);
 
-        char[] tmp = d.toCharArray();
+        int dropCount = Dono.MAX_DK_LEN - dkLen;
 
-        tmp[tmp.length - 2] = Dono.MAGIC_SYMBOL;
-        tmp[tmp.length - 1] = Dono.MAGIC_CAPITAL;
+        if (addFixedSymbol)
+        {
+            dropCount++;
+        }
 
-        return new String(tmp);
+        if (addFixedCapital)
+        {
+            dropCount++;
+        }
+
+        d = d.substring(0, d.length() - dropCount);
+
+        if (addFixedSymbol)
+        {
+            d += Dono.MagicSymbol;
+        }
+
+        if (addFixedCapital)
+        {
+            d += Dono.MagicCapital;
+        }
+
+        return d;
     }
 
     private int getIterations(String k)
     {
-        if (k.length() >= rs.length)
+        if (k.length() >= Dono.Iterations.length)
         {
-            return rs[rs.length - 1].intValue();
+            return Dono.Iterations[Dono.Iterations.length - 1].intValue();
         }
         else
         {
-            return rs[k.length()].intValue();
+            return Dono.Iterations[k.length()].intValue();
         }
     }
 
-    public String derivePassword(String k, String l, int c, int dkLen)
+    private String derivePassword(String k, String l, int c)
     {
-        String s = this.SHA256(k + l + this.MAGIC_SALT);
+        String s = this.SHA256(k + l + this.MagicSalt);
 
-        String d = this.PBKDF2(k, s, c, dkLen);
+        String d = this.PBKDF2(k, s, c, Dono.MAX_DK_LEN);
 
         return d;
     }

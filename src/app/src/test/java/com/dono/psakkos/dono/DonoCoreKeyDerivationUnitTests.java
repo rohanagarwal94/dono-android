@@ -20,7 +20,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class DonoKeyDerivationUnitTests
+public class DonoCoreKeyDerivationUnitTests
 {
     @Test
     public void requireThatDonoKeyDerivationIsCorrectForKeyLength17() throws Exception
@@ -29,7 +29,7 @@ public class DonoKeyDerivationUnitTests
 
         String password = dono.computePassword("helloworldofpassw", "ords");
 
-        assertEquals("9e06ac4eb49d2d5ee29398a9045b237af60abe794bea8b129d430e90be23a6!A", password);
+        assertEquals("9e06ac4eb49d2d5ee29398a9045b237af60abe794bea8b129d430e90be23a6db", password);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class DonoKeyDerivationUnitTests
 
         String password = dono.computePassword("helloworldofpasswo", "rds");
 
-        assertEquals("c54f93f0f9393a3c6b5aab984f3363264ab33ea47f350fb1b89ace7a5419f3!A", password);
+        assertEquals("c54f93f0f9393a3c6b5aab984f3363264ab33ea47f350fb1b89ace7a5419f321", password);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class DonoKeyDerivationUnitTests
 
         String password = dono.computePassword("helloworldofpasswor", "ds");
 
-        assertEquals("afffd6a73ec4a0a162f9977aa086ac8bd7b3e314e2a175d820f46940eb91af!A", password);
+        assertEquals("afffd6a73ec4a0a162f9977aa086ac8bd7b3e314e2a175d820f46940eb91afb3", password);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class DonoKeyDerivationUnitTests
 
         String password = dono.computePassword("helloworldofpassword", "s");
 
-        assertEquals("bbe639f58065f3dc36598850febbf4e1e4067ecd5cec2ab373573138630903!A", password);
+        assertEquals("bbe639f58065f3dc36598850febbf4e1e4067ecd5cec2ab373573138630903ab", password);
     }
 
     @Test
@@ -69,12 +69,6 @@ public class DonoKeyDerivationUnitTests
 
         String password = dono.computePassword("helloworldofpasswords", "test");
 
-        assertEquals("15698afa02c9628690d18d5cfe456f1a6e1f2181f029be3b431ec84a28d2f6!A", password);
-    }
-
-    @Test
-    public void requireThatMinKeyLengthIs17() throws Exception
-    {
-        assertEquals(17, Dono.MIN_KEY_LENGTH);
+        assertEquals("15698afa02c9628690d18d5cfe456f1a6e1f2181f029be3b431ec84a28d2f646", password);
     }
 }
