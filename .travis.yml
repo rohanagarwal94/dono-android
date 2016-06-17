@@ -20,7 +20,7 @@ android:
 
 script:
   - cd src
-  - ./gradlew test
+  - ./gradlew jacocoTestReport
 
 notifications:
     on_failure: always
