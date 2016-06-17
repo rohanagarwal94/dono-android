@@ -26,4 +26,5 @@ notifications:
     on_failure: always
 
 after_success:
+  - cd src
   - bash <(curl -s https://codecov.io/bash)
