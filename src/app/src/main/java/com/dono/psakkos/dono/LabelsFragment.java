@@ -51,13 +51,13 @@ public class LabelsFragment extends Fragment
 
                         if (key == null)
                         {
-                            MainActivity.showInfo("You have to set your Key before retrieving your passwords");
+                            MainActivity.showError("You need to set your Key in order to derive passwords for your Labels!");
                             return;
                         }
 
                         String label = String.valueOf(parent.getItemAtPosition(position));
 
-                        String password = null;
+                        String password;
 
                         try
                         {
@@ -65,7 +65,8 @@ public class LabelsFragment extends Fragment
                         }
                         catch (Exception e)
                         {
-                            e.printStackTrace();
+                            MainActivity.showError("Oops! Failed to derive the password for Label " + label);
+                            return;
                         }
 
                         ClipboardManager clipboard = (ClipboardManager) view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);

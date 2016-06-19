@@ -67,7 +67,7 @@ public class KeyFragment extends Fragment
 
                     if (key.length() < Dono.MIN_KEY_LENGTH)
                     {
-                        MainActivity.showError("Your Key has to be longer than 16 characters long");
+                        MainActivity.showError("Your Key has to be longer than " + (Dono.MIN_KEY_LENGTH - 1) + " characters!");
                         passwordField.setText(PersistableKey.getKey(view.getContext()));
                     }
                     else
