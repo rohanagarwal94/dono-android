@@ -57,7 +57,16 @@ public class LabelsFragment extends Fragment
 
                         String label = String.valueOf(parent.getItemAtPosition(position));
 
-                        String password = Dono.computePassword(key, label);
+                        String password = null;
+
+                        try
+                        {
+                            password = new Dono().computePassword(key, label);
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
 
                         ClipboardManager clipboard = (ClipboardManager) view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                         clipboard.setPrimaryClip(ClipData.newPlainText(label, password));
