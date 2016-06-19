@@ -18,10 +18,10 @@ android {
 
     defaultConfig {
         applicationId "com.dono.psakkos.dono"
-        minSdkVersion 20
+        minSdkVersion 21
         targetSdkVersion 23
-        versionCode 6
-        versionName "2.4.0"
+        versionCode 7
+        versionName "2.5.0"
     }
     buildTypes {
         debug {
