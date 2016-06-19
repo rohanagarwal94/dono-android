@@ -44,13 +44,12 @@
             android:layout_margin="10dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="36dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/labelText"
-            android:layout_weight="0.36"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:gravity="center_vertical"
             android:layout_margin="2dp" />
     </LinearLayout>

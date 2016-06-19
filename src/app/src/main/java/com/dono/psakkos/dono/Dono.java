@@ -21,6 +21,7 @@ import org.spongycastle.crypto.generators.PKCS5S2ParametersGenerator;
 import org.spongycastle.crypto.params.KeyParameter;
 
 import java.math.BigInteger;
+
 import java.nio.charset.StandardCharsets;
 
 public class Dono
@@ -60,6 +61,8 @@ public class Dono
     private static char MagicSymbol = '!';
 
     private static char MagicCapital = 'A';
+
+    private static int SHA256_digestBits = 256;
 
     public String computePassword(String k, String l) throws Exception
     {
@@ -117,9 +120,9 @@ public class Dono
     {
         String s = this.SHA256(k + l + this.MagicSalt);
 
-        String d = this.PBKDF2_SHA256(k, s, c, dkLen);
+        String d = this.PBKDF2_SHA256(k, s, c);
 
-        return d;
+        return d.substring(0, dkLen);
     }
 
     private String SHA256(String message)
@@ -134,15 +137,15 @@ public class Dono
         return this.toHex(digestBytes);
     }
 
-    private String PBKDF2_SHA256(String key, String salt, int c, int dkLen)
+    private String PBKDF2_SHA256(String key, String salt, int c)
     {
         byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
         byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
         PKCS5S2ParametersGenerator gen = new PKCS5S2ParametersGenerator(new SHA256Digest());
         gen.init(keyBytes, saltBytes, c);
-        byte []dk = ((KeyParameter) gen.generateDerivedParameters(256)).getKey();
+        byte []dk = ((KeyParameter) gen.generateDerivedParameters(Dono.SHA256_digestBits)).getKey();
 
-        return this.toHex(dk).substring(0, dkLen);
+        return this.toHex(dk);
     }
 
     private String toHex(byte[] data)

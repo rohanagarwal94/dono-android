@@ -17,7 +17,6 @@
         android:id="@+id/passwordField"
         android:textAlignment="center"
         android:inputType="textPassword"
-        android:password="true"
         android:selectAllOnFocus="true" />
 
 </RelativeLayout>
