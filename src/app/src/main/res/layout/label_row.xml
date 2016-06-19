@@ -4,7 +4,7 @@
     android:layout_height="80dp"
     android:id="@+id/swipe">
 
-    <LinearLayout android:background="#d32f2f"
+    <LinearLayout android:background="@color/red"
     android:id="@+id/bottom_wrapper"
     android:layout_width="80dp"
     android:weightSum="1"
