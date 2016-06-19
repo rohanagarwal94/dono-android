@@ -53,8 +53,10 @@ public class MainActivity extends AppCompatActivity
     private static Activity Me;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -115,7 +117,8 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item)
+    {
         this.hideKeyBoard();
         this.removeAllFragments();
 
@@ -136,7 +139,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void removeAllFragments() {
+    private void removeAllFragments()
+    {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -160,15 +164,19 @@ public class MainActivity extends AppCompatActivity
         this.getSupportActionBar().setTitle(toolbarTitle);
     }
 
-    private void hideKeyBoard() {
+    private void hideKeyBoard()
+    {
         View view = this.getCurrentFocus();
-        if (view != null) {
+
+        if (view != null)
+        {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
-    private void showLonelyFragment() {
+    private void showLonelyFragment()
+    {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -177,7 +185,8 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
-    private void yourLabelsLayout() {
+    private void yourLabelsLayout()
+    {
         this.setToolbarTitle("Your Labels");
 
         if (new PersistableLabels(this).getAll().length == 0)
@@ -190,7 +199,8 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void showLabelsFragment() {
+    private void showLabelsFragment()
+    {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -199,7 +209,8 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
-    private void addLabelLayout() {
+    private void addLabelLayout()
+    {
         this.setToolbarTitle("Add Label");
 
         this.showAddLabelFragment();
@@ -214,13 +225,15 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
-    private void keyLayout() {
+    private void keyLayout()
+    {
         this.setToolbarTitle("Your Key");
 
         this.showKeyFragment();
     }
 
-    private void showKeyFragment() {
+    private void showKeyFragment()
+    {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -231,7 +244,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onStart() {
+    public void onStart()
+    {
         super.onStart();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -251,7 +265,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onStop() {
+    public void onStop()
+    {
         super.onStop();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
