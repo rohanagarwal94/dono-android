@@ -17,5 +17,19 @@
         android:id="@+id/addLabelTextField"
         android:textAlignment="center" />
 
+    <LinearLayout android:id="@+id/newlabel_kb_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:gravity="right">
+        <ImageButton
+            android:background="@color/colorPrimary"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:src="@drawable/plus"
+            android:id="@+id/doneButton"
+            android:clickable="false"/>
+    </LinearLayout>
 
 </RelativeLayout>

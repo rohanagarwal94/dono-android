@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.dono.psakkos.dono;
+package com.dono.psakkos.dono.fragments;
 
 import android.app.Fragment;
 import android.content.ClipData;
@@ -28,6 +28,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.dono.psakkos.dono.core.Dono;
+import com.dono.psakkos.dono.LabelAdapter;
+import com.dono.psakkos.dono.MainActivity;
+import com.dono.psakkos.dono.core.PersistableKey;
+import com.dono.psakkos.dono.core.PersistableLabels;
+import com.dono.psakkos.dono.R;
 
 public class LabelsFragment extends Fragment
 {

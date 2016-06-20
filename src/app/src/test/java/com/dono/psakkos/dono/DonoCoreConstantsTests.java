@@ -16,6 +16,8 @@
 
 package com.dono.psakkos.dono;
 
+import com.dono.psakkos.dono.core.Dono;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

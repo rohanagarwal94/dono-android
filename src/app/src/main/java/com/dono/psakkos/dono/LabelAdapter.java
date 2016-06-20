@@ -25,6 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
+import com.dono.psakkos.dono.core.PersistableLabels;
 
 public class LabelAdapter extends BaseSwipeAdapter
 {

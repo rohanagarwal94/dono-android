@@ -14,9 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.dono.psakkos.dono;
+package com.dono.psakkos.dono.core;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,9 +40,14 @@ public class PersistableLabels
         this.loadLabels();
     }
 
+    public String canonicalize(String label)
+    {
+        return label.toLowerCase().trim();
+    }
+
     public String add(String label)
     {
-        label = label.toLowerCase().trim();
+        label = canonicalize(label);
 
         if (PersistableLabels.Labels.contains(label) || label.isEmpty())
         {
