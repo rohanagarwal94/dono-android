@@ -94,16 +94,19 @@ public class AddLabelFragment extends Fragment
     {
         String label = newLabelTextField.getText().toString();
 
-        PersistableLabels persistableLabels = new PersistableLabels(view.getContext());
-        String labelAdded = persistableLabels.add(label);
+        if (!label.isEmpty())
+        {
+            PersistableLabels persistableLabels = new PersistableLabels(view.getContext());
+            String labelAdded = persistableLabels.add(label);
 
-        if (labelAdded != null)
-        {
-            MainActivity.showInfo("Label " + labelAdded + " was added to your Labels!");
-        }
-        else
-        {
-            MainActivity.showError("Label " + persistableLabels.canonicalize(label) + " is already added to your Labels!");
+            if (labelAdded != null)
+            {
+                MainActivity.showInfo("Label " + labelAdded + " was added to your Labels!");
+            }
+            else
+            {
+                MainActivity.showError("Label " + persistableLabels.canonicalize(label) + " is already added to your Labels!");
+            }
         }
 
         this.clearInput();
