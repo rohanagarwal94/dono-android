@@ -45,14 +45,13 @@ public class AddLabelFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.add_label_fragment, container, false);
+
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        view = this.getView();
-
         this.newLabelTextField = (EditText) view.findViewById(R.id.addLabelTextField);
         this.doneButton = (ImageButton) view.findViewById(R.id.doneButton);
         this.keyboardToolbar = (LinearLayout) view.findViewById(R.id.newlabel_kb_toolbar);
@@ -78,14 +77,14 @@ public class AddLabelFragment extends Fragment
                     showToolbar();
                 }
             }
-
         });
 
-        this.doneButton.setOnClickListener(new View.OnClickListener() {
+        this.doneButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v)
+            public void onClick(View view)
             {
-                addLabel(v);
+                addLabel(view);
             }
         });
     }
@@ -117,7 +116,7 @@ public class AddLabelFragment extends Fragment
     {
         this.newLabelTextField.requestFocus();
         InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(newLabelTextField, InputMethodManager.SHOW_IMPLICIT);
+        imm.showSoftInput(this.newLabelTextField, InputMethodManager.SHOW_IMPLICIT);
 
         this.showToolbar();
     }
@@ -134,6 +133,7 @@ public class AddLabelFragment extends Fragment
 
         this.hideToolbar();
         this.clearInput();
+        this.newLabelTextField.clearFocus();
     }
 
     private void showToolbar()

@@ -20,11 +20,15 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.dono.psakkos.dono.core.Dono;
 import com.dono.psakkos.dono.MainActivity;
@@ -33,6 +37,14 @@ import com.dono.psakkos.dono.R;
 
 public class KeyFragment extends Fragment
 {
+    EditText keyTextField;
+
+    ImageButton setKeyButton;
+
+    ImageButton revealButton;
+
+    LinearLayout keyboardToolbar;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -45,42 +57,139 @@ public class KeyFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        view = getView();
-        EditText editText= (EditText) view.findViewById(R.id.passwordField);
-        editText.requestFocus();
+        this.keyTextField = (EditText) view.findViewById(R.id.keyField);
+        this.setKeyButton = (ImageButton) view.findViewById(R.id.setKeyButton);
+        this.revealButton = (ImageButton) view.findViewById(R.id.revealButton);
+        this.keyboardToolbar = (LinearLayout) view.findViewById(R.id.key_kb_toolbar);
 
-        String key = PersistableKey.getKey(view.getContext());
-        editText.setText(key);
+        // Focus on the key text field
+        this.focusOnInput(view);
 
-        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-        view.findViewById(R.id.passwordField);
+        this.restoreInput(view);
 
-        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        this.keyTextField.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
             @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus)
-                {
-                    if (view != null)
-                    {
-                        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    }
+            public void onFocusChange(View view, boolean hasFocus)
+            {
+                handleFocus(view, hasFocus);
+            }
 
-                    EditText passwordField = (EditText)view.findViewById(R.id.passwordField);
-                    String key = passwordField.getText().toString();
+        });
 
-                    if (key.length() < Dono.MIN_KEY_LENGTH)
-                    {
-                        MainActivity.showError("Your Key has to be longer than " + (Dono.MIN_KEY_LENGTH - 1) + " characters!");
-                        passwordField.setText(PersistableKey.getKey(view.getContext()));
-                    }
-                    else
-                    {
-                        PersistableKey.setKey(view.getContext(), key);
-                        MainActivity.showInfo("Your Key was set!");
-                    }
-                }
-            }});
+        this.setKeyButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                changeKey(view);
+            }
+        });
+
+        this.revealButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                handleKeyVisibility(view);
+            }
+        });
+
+    }
+
+    private void handleFocus(View view, boolean hasFocus)
+    {
+        if (!hasFocus)
+        {
+            if (view != null)
+            {
+                hideKeyboard(view);
+            }
+        }
+        else
+        {
+            showToolbar();
+        }
+    }
+
+    private void changeKey(View view)
+    {
+        String key = this.keyTextField.getText().toString();
+        PersistableKey persistableKey = new PersistableKey(view.getContext());
+
+        if (key.length() < Dono.MIN_KEY_LENGTH)
+        {
+            MainActivity.showError("Your Key has to be longer than " + (Dono.MIN_KEY_LENGTH - 1) + " characters!");
+            this.restoreInput(view);
+        }
+        else
+        {
+            persistableKey.setKey(key);
+            MainActivity.showInfo("Your Key was set!");
+        }
+
+        this.hideKeyboard(view);
+    }
+
+    private void handleKeyVisibility(View view)
+    {
+        boolean shouldReveal = this.keyTextField.getTransformationMethod() == PasswordTransformationMethod.getInstance();
+
+        if (shouldReveal)
+        {
+            this.revealKey();
+            this.revealButton.setImageResource(R.drawable.eyeoff);
+        }
+        else
+        {
+            this.hideKey();
+            this.revealButton.setImageResource(R.drawable.eye);
+        }
+    }
+
+    private void revealKey()
+    {
+        this.keyTextField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+    }
+
+    private void hideKey()
+    {
+        this.keyTextField.setTransformationMethod(PasswordTransformationMethod.getInstance());
+    }
+
+    private void focusOnInput(View view)
+    {
+        this.keyTextField.requestFocus();
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(this.keyTextField, InputMethodManager.SHOW_IMPLICIT);
+
+        this.showToolbar();
+    }
+
+    private void restoreInput(View view)
+    {
+        PersistableKey key = new PersistableKey(view.getContext());
+        this.keyTextField.setText(key.getKey());
+    }
+
+    private void hideKeyboard(View view)
+    {
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+        this.hideToolbar();
+        this.keyTextField.clearFocus();
+        this.hideKey();
+        this.restoreInput(view);
+    }
+
+    private void showToolbar()
+    {
+        this.keyboardToolbar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideToolbar()
+    {
+        this.keyboardToolbar.setVisibility(View.GONE);
     }
 }
