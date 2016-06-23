@@ -33,6 +33,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import com.dono.psakkos.dono.core.PersistableLabels;
 import com.dono.psakkos.dono.fragments.AddLabelFragment;
@@ -75,13 +76,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         this.yourLabelsLayout();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         MainActivity.Me = this;
+
+        this.removeTitle();
     }
 
     @Override
@@ -164,8 +166,16 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void setToolbarTitle(String toolbarTitle) {
-        this.getSupportActionBar().setTitle(toolbarTitle);
+    private void removeTitle()
+    {
+        this.getSupportActionBar().setTitle("");
+    }
+
+    private void setToolbarTitle(String title)
+    {
+        TextView toolbarTitle = (TextView) this.findViewById(R.id.toolbarTitle);
+
+        toolbarTitle.setText(title);
     }
 
     private void hideKeyBoard()

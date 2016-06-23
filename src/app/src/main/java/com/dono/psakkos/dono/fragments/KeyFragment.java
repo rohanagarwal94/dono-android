@@ -117,6 +117,13 @@ public class KeyFragment extends Fragment
         String key = this.keyTextField.getText().toString();
         PersistableKey persistableKey = new PersistableKey(view.getContext());
 
+        this.hideKeyboard(view);
+
+        if (key.equals(persistableKey.getKey()))
+        {
+            return;
+        }
+
         if (key.length() < Dono.MIN_KEY_LENGTH)
         {
             MainActivity.showError("Your Key has to be longer than " + (Dono.MIN_KEY_LENGTH - 1) + " characters!");
@@ -127,8 +134,6 @@ public class KeyFragment extends Fragment
             persistableKey.setKey(key);
             MainActivity.showInfo("Your Key was set!");
         }
-
-        this.hideKeyboard(view);
     }
 
     private void handleKeyVisibility(View view)
@@ -180,7 +185,6 @@ public class KeyFragment extends Fragment
         this.hideToolbar();
         this.keyTextField.clearFocus();
         this.hideKey();
-        this.restoreInput(view);
     }
 
     private void showToolbar()
