@@ -28,8 +28,7 @@
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:src="@drawable/plus"
-            android:id="@+id/doneButton"
-            android:clickable="false"/>
+            android:id="@+id/doneButton"/>
     </LinearLayout>
 
 </RelativeLayout>

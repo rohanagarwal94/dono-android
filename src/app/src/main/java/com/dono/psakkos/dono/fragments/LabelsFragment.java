@@ -54,7 +54,8 @@ public class LabelsFragment extends Fragment
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                     {
-                        String key = PersistableKey.getKey(view.getContext());
+                        PersistableKey persistableKey = new PersistableKey(view.getContext());
+                        String key = persistableKey.getKey();
 
                         if (key == null)
                         {

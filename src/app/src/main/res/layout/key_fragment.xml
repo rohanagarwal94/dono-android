@@ -3,7 +3,6 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:focusable="true"
-    android:contextClickable="true"
     android:clickable="true">
 
     <EditText
@@ -14,12 +13,12 @@
         android:layout_marginTop="112dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:id="@+id/passwordField"
+        android:id="@+id/keyField"
         android:textAlignment="center"
         android:inputType="textPassword"
         android:selectAllOnFocus="true" />
-<!--
-    <LinearLayout android:id="@+id/my_toolbar"
+
+    <LinearLayout android:id="@+id/key_kb_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -30,8 +29,7 @@
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:src="@drawable/check"
-            android:id="@+id/doneButton"
-            android:clickable="false" />
+            android:id="@+id/setKeyButton"/>
         <ImageButton
             android:background="@color/colorPrimary"
             android:layout_width="42dp"
@@ -39,5 +37,5 @@
             android:src="@drawable/eye"
             android:id="@+id/revealButton"/>
     </LinearLayout>
--->
+
 </RelativeLayout>

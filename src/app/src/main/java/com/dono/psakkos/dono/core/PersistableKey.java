@@ -30,15 +30,22 @@ public class PersistableKey
 {
     private static String KEY_FILE = ".key";
 
-    public static String getKey(Context context)
+    private Context context;
+
+    public PersistableKey(Context context)
+    {
+        this.context = context;
+    }
+
+    public String getKey()
     {
         String key = null;
 
         try
         {
-            BufferedReader br = new BufferedReader(new InputStreamReader(context.openFileInput(PersistableKey.KEY_FILE)));
+            BufferedReader br = new BufferedReader(new InputStreamReader(this.context.openFileInput(PersistableKey.KEY_FILE)));
 
-            String password = PersistableKey.getAndroidId(context);
+            String password = this.getAndroidId();
             String encryptedKey = br.readLine();
 
             key = AESCrypt.decrypt(password, encryptedKey);
@@ -52,15 +59,15 @@ public class PersistableKey
         return key;
     }
 
-    public static void setKey(Context context, String key)
+    public void setKey(String key)
     {
-        context.deleteFile(PersistableKey.KEY_FILE);
+        this.context.deleteFile(PersistableKey.KEY_FILE);
 
         try
         {
-            String password = PersistableKey.getAndroidId(context);
+            String password = this.getAndroidId();
             String encryptedMsg = AESCrypt.encrypt(password, key);
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(context.openFileOutput(PersistableKey.KEY_FILE, Context.MODE_PRIVATE)));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(this.context.openFileOutput(PersistableKey.KEY_FILE, Context.MODE_PRIVATE)));
             bw.write(encryptedMsg);
             bw.close();
         }
@@ -69,8 +76,8 @@ public class PersistableKey
         }
     }
 
-    private static String getAndroidId(Context context)
+    private String getAndroidId()
     {
-        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        return Settings.Secure.getString(this.context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 }
