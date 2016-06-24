@@ -197,5 +197,6 @@ public class KeyFragment extends DonoFragment
     private void hideToolbar()
     {
         this.keyboardToolbar.setVisibility(View.GONE);
+        this.revealButton.setImageResource(R.drawable.eye);
     }
 }
