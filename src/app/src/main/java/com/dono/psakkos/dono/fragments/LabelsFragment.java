@@ -16,7 +16,6 @@
 
 package com.dono.psakkos.dono.fragments;
 
-import android.app.Fragment;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -31,17 +30,18 @@ import android.widget.ListView;
 
 import com.dono.psakkos.dono.core.Dono;
 import com.dono.psakkos.dono.LabelAdapter;
-import com.dono.psakkos.dono.MainActivity;
 import com.dono.psakkos.dono.core.PersistableKey;
 import com.dono.psakkos.dono.core.PersistableLabels;
 import com.dono.psakkos.dono.R;
 
-public class LabelsFragment extends Fragment
+public class LabelsFragment extends DonoFragment
 {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        super.onCreateView(inflater, container, savedInstanceState);
+
         View view = inflater.inflate(R.layout.labels_fragment, container, false);
 
         String[] labels = new PersistableLabels(view.getContext()).getAll();
@@ -59,7 +59,7 @@ public class LabelsFragment extends Fragment
 
                         if (key == null)
                         {
-                            MainActivity.showError("You need to set your Key in order to derive passwords for your Labels!");
+                            donoToastFactory.makeErrorToast("You need to set your Key in order to derive passwords for your Labels!").show();
                             return;
                         }
 
@@ -73,14 +73,14 @@ public class LabelsFragment extends Fragment
                         }
                         catch (Exception e)
                         {
-                            MainActivity.showError("Oops! Failed to derive the password for Label " + label);
+                            donoToastFactory.makeErrorToast("Oops! Failed to derive the password for Label " + label).show();
                             return;
                         }
 
                         ClipboardManager clipboard = (ClipboardManager) view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                         clipboard.setPrimaryClip(ClipData.newPlainText(label, password));
 
-                        MainActivity.showInfo("Your password for " + label + " is ready to be pasted!");
+                        donoToastFactory.makeInfoToast("Your password for " + label + " is ready to be pasted!").show();
                     }
                 }
         );

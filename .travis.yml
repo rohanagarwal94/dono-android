@@ -26,4 +26,8 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 notifications:
-    on_failure: always
+  email:
+      recipients:
+        - panos.sakkos@gmail.com
+      on_failure: always
+      on_success: never

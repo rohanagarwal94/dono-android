@@ -9,4 +9,3 @@ GNU GPLv3
 - [AndroidSwipeLayout](https://github.com/daimajia/AndroidSwipeLayout)
 - [Material Design Icons](https://github.com/Templarian/MaterialDesign)
 - [SpongyCastle](https://github.com/rtyley/spongycastle)
-- [SuperToasts](https://github.com/JohnPersano/Supertoasts)

@@ -35,7 +35,7 @@ import com.dono.psakkos.dono.MainActivity;
 import com.dono.psakkos.dono.core.PersistableKey;
 import com.dono.psakkos.dono.R;
 
-public class KeyFragment extends Fragment
+public class KeyFragment extends DonoFragment
 {
     EditText keyTextField;
 
@@ -49,6 +49,8 @@ public class KeyFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        super.onCreateView(inflater, container, savedInstanceState);
+
         View view = inflater.inflate(R.layout.key_fragment, container, false);
 
         return view;
@@ -126,13 +128,13 @@ public class KeyFragment extends Fragment
 
         if (key.length() < Dono.MIN_KEY_LENGTH)
         {
-            MainActivity.showError("Your Key has to be longer than " + (Dono.MIN_KEY_LENGTH - 1) + " characters!");
+            donoToastFactory.makeErrorToast("Your Key has to be longer than " + (Dono.MIN_KEY_LENGTH - 1) + " characters!").show();
             this.restoreInput(view);
         }
         else
         {
             persistableKey.setKey(key);
-            MainActivity.showInfo("Your Key was set!");
+            donoToastFactory.makeInfoToast("Your Key was set!").show();
         }
     }
 

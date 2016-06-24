@@ -32,7 +32,7 @@ import com.dono.psakkos.dono.MainActivity;
 import com.dono.psakkos.dono.core.PersistableLabels;
 import com.dono.psakkos.dono.R;
 
-public class AddLabelFragment extends Fragment
+public class AddLabelFragment extends DonoFragment
 {
     EditText newLabelTextField;
 
@@ -44,6 +44,8 @@ public class AddLabelFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        super.onCreateView(inflater, container, savedInstanceState);
+
         View view = inflater.inflate(R.layout.add_label_fragment, container, false);
 
         return view;
@@ -100,11 +102,11 @@ public class AddLabelFragment extends Fragment
 
             if (labelAdded != null)
             {
-                MainActivity.showInfo("Label " + labelAdded + " was added to your Labels!");
+                donoToastFactory.makeInfoToast("Label " + labelAdded + " was added to your Labels!").show();
             }
             else
             {
-                MainActivity.showError("Label " + persistableLabels.canonicalize(label) + " is already added to your Labels!");
+                donoToastFactory.makeErrorToast("Label " + persistableLabels.canonicalize(label) + " is already added to your Labels!").show();
             }
         }
 

@@ -34,14 +34,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dono.psakkos.dono.core.PersistableLabels;
 import com.dono.psakkos.dono.fragments.AddLabelFragment;
 import com.dono.psakkos.dono.fragments.KeyFragment;
 import com.dono.psakkos.dono.fragments.LabelsFragment;
 import com.dono.psakkos.dono.fragments.LonelyFragment;
-import com.github.johnpersano.supertoasts.SuperActivityToast;
-import com.github.johnpersano.supertoasts.SuperToast;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -297,28 +296,5 @@ public class MainActivity extends AppCompatActivity
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
-    }
-
-
-    public static void showError(String error)
-    {
-        SuperActivityToast superActivityToast = new SuperActivityToast(MainActivity.Me);
-        superActivityToast.setText(error);
-        superActivityToast.setDuration(SuperToast.Duration.LONG);
-        superActivityToast.setBackground(SuperToast.Background.RED);
-        superActivityToast.setTextColor(Color.WHITE);
-        superActivityToast.setTouchToDismiss(true);
-        superActivityToast.show();
-    }
-
-    public static void showInfo(String info)
-    {
-        SuperActivityToast superActivityToast = new SuperActivityToast(MainActivity.Me);
-        superActivityToast.setText(info);
-        superActivityToast.setDuration(SuperToast.Duration.SHORT);
-        superActivityToast.setBackground(SuperToast.Background.BLUE);
-        superActivityToast.setTextColor(Color.WHITE);
-        superActivityToast.setTouchToDismiss(true);
-        superActivityToast.show();
     }
 }
