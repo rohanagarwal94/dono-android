@@ -19,7 +19,10 @@ package com.dono.psakkos.dono.fragments;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +39,9 @@ import com.dono.psakkos.dono.R;
 
 public class LabelsFragment extends DonoFragment
 {
+    // Milliseconds after which the row's background color will be restored
+    public static int ROW_REFRESH_MILLISECONDS = 100;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -45,8 +51,8 @@ public class LabelsFragment extends DonoFragment
         View view = inflater.inflate(R.layout.labels_fragment, container, false);
 
         String[] labels = new PersistableLabels(view.getContext()).getAll();
-        ListAdapter listAdapter = new LabelAdapter(view.getContext(), labels);
-        ListView labelsListView = (ListView)view.findViewById(R.id.labelsListView);
+        final ListAdapter listAdapter = new LabelAdapter(view.getContext(), labels);
+        final ListView labelsListView = (ListView)view.findViewById(R.id.labelsListView);
         labelsListView.setAdapter(listAdapter);
 
         labelsListView.setOnItemClickListener(
@@ -54,6 +60,10 @@ public class LabelsFragment extends DonoFragment
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                     {
+                        view.setBackgroundColor(getResources().getColor(R.color.secondary));
+
+                        restoreCellColors();
+
                         PersistableKey persistableKey = new PersistableKey(view.getContext());
                         String key = persistableKey.getKey();
 
@@ -86,5 +96,22 @@ public class LabelsFragment extends DonoFragment
         );
 
         return view;
+    }
+
+    public void restoreCellColors() {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                ListView list = (ListView) getView().findViewById(R.id.labelsListView);
+
+                for (int i = 0; i < list.getChildCount(); i++)
+                {
+                    View child = list.getChildAt(i);
+                    child.setBackgroundColor(Color.WHITE);
+                }
+            }
+        }, LabelsFragment.ROW_REFRESH_MILLISECONDS);
     }
 }
