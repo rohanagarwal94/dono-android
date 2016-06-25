@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -34,13 +33,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dono.psakkos.dono.core.PersistableLabels;
 import com.dono.psakkos.dono.fragments.AddLabelFragment;
 import com.dono.psakkos.dono.fragments.KeyFragment;
 import com.dono.psakkos.dono.fragments.LabelsFragment;
 import com.dono.psakkos.dono.fragments.LonelyFragment;
+import com.dono.psakkos.dono.fragments.SettingsFragment;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -130,12 +129,21 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_labels) {
+        if (id == R.id.nav_labels)
+        {
             this.yourLabelsLayout();
-        } else if (id == R.id.nav_add_label) {
+        }
+        else if (id == R.id.nav_add_label)
+        {
             this.addLabelLayout();
-        } else if (id == R.id.nav_key) {
+        }
+        else if (id == R.id.nav_key)
+        {
             this.keyLayout();
+        }
+        else if (id == R.id.nav_settings)
+        {
+            this.settingsLayout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -252,6 +260,24 @@ public class MainActivity extends AppCompatActivity
 
         KeyFragment keyFragment = new KeyFragment();
         fragmentTransaction.replace(R.id.mainFragment, keyFragment);
+
+        fragmentTransaction.commit();
+    }
+
+    private void settingsLayout()
+    {
+        this.setToolbarTitle("Settings");
+
+        this.showSettingsFragment();
+    }
+
+    private void showSettingsFragment()
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        SettingsFragment settingsFragment = new SettingsFragment();
+        fragmentTransaction.replace(R.id.mainFragment, settingsFragment);
 
         fragmentTransaction.commit();
     }

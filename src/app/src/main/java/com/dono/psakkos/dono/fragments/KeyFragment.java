@@ -16,7 +16,6 @@
 
 package com.dono.psakkos.dono.fragments;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,7 +30,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.dono.psakkos.dono.core.Dono;
-import com.dono.psakkos.dono.MainActivity;
 import com.dono.psakkos.dono.core.PersistableKey;
 import com.dono.psakkos.dono.R;
 
