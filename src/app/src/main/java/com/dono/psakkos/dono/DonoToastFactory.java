@@ -1,5 +1,5 @@
 // Dono Android - Password Derivation Tool
-// Copyright (C) 2016  Panos Sakkos
+// Copyright (C) 2016  Dono - Password Derivation Tool
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
