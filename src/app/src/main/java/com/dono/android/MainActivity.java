@@ -14,13 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.dono.psakkos.dono;
+package com.dono.android;
 
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -34,13 +33,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.dono.psakkos.dono.core.PersistableLabels;
-import com.dono.psakkos.dono.fragments.AddLabelFragment;
-import com.dono.psakkos.dono.fragments.KeyFragment;
-import com.dono.psakkos.dono.fragments.LabelsFragment;
-import com.dono.psakkos.dono.fragments.LonelyFragment;
+import com.dono.android.core.PersistableLabels;
+import com.dono.android.fragments.AddLabelFragment;
+import com.dono.android.fragments.KeyFragment;
+import com.dono.android.fragments.LabelsFragment;
+import com.dono.android.fragments.LonelyFragment;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;

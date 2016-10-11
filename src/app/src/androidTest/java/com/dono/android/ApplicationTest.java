@@ -1,4 +1,4 @@
-package com.dono.psakkos.dono;
+package com.dono.android;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

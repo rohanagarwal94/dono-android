@@ -14,9 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.dono.psakkos.dono.fragments;
+package com.dono.android.fragments;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -28,9 +27,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.dono.psakkos.dono.MainActivity;
-import com.dono.psakkos.dono.core.PersistableLabels;
-import com.dono.psakkos.dono.R;
+import com.dono.android.core.PersistableLabels;
+import com.dono.android.R;
 
 public class AddLabelFragment extends DonoFragment
 {

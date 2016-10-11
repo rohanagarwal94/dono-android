@@ -14,24 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.dono.psakkos.dono.fragments;
+package com.dono.android;
 
-import android.app.Fragment;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import com.dono.android.core.Dono;
 
-import com.dono.psakkos.dono.R;
+import org.junit.Test;
 
-public class LonelyFragment extends Fragment
+import static org.junit.Assert.*;
+
+public class DonoCoreConstantsTests
 {
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    @Test
+    public void requireThatMinKeyLengthIs17() throws Exception
     {
-        View view = inflater.inflate(R.layout.lonely_fragment, container, false);
-        return view;
+        assertEquals(17, Dono.MIN_KEY_LENGTH);
+    }
+
+    @Test
+    public void requireThatMaxDkLenIs32() throws Exception
+    {
+        assertEquals(64, Dono.MAX_DK_LEN);
     }
 }

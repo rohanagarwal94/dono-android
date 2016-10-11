@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.dono.psakkos.dono.fragments;
+package com.dono.android.fragments;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -31,11 +31,11 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.dono.psakkos.dono.core.Dono;
-import com.dono.psakkos.dono.LabelAdapter;
-import com.dono.psakkos.dono.core.PersistableKey;
-import com.dono.psakkos.dono.core.PersistableLabels;
-import com.dono.psakkos.dono.R;
+import com.dono.android.core.Dono;
+import com.dono.android.LabelAdapter;
+import com.dono.android.core.PersistableKey;
+import com.dono.android.core.PersistableLabels;
+import com.dono.android.R;
 
 public class LabelsFragment extends DonoFragment
 {

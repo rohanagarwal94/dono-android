@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.dono.psakkos.dono;
+package com.dono.android;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -26,7 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
-import com.dono.psakkos.dono.core.PersistableLabels;
+import com.dono.android.core.PersistableLabels;
 
 public class LabelAdapter extends BaseSwipeAdapter
 {

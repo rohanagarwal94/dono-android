@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.dono.psakkos.dono.fragments;
+package com.dono.android.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -23,7 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dono.psakkos.dono.DonoToastFactory;
+import com.dono.android.DonoToastFactory;
 
 public class DonoFragment extends Fragment
 {

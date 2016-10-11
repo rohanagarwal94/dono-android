@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.dono.psakkos.dono.MainActivity">
+    tools:context="com.dono.android.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -35,6 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/mainFragment"
-        android:name="com.dono.psakkos.dono.fragments.EmptyFragment" />
+        android:name="com.dono.android.fragments.EmptyFragment" />
 
 </android.support.design.widget.CoordinatorLayout>

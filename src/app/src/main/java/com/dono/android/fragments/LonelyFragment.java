@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.dono.psakkos.dono.fragments;
+package com.dono.android.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -23,15 +23,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dono.psakkos.dono.R;
+import com.dono.android.R;
 
-public class EmptyFragment extends Fragment
+public class LonelyFragment extends Fragment
 {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.empty_fragment, container, false);
+        View view = inflater.inflate(R.layout.lonely_fragment, container, false);
         return view;
     }
 }
